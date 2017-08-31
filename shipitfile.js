@@ -42,6 +42,6 @@ module.exports = function (shipit) {
   })
 
   shipit.blTask('run', function() {
-    return shipit.remote(`docker run --name blog_be -v /home/go_files:/go/src --link mysql:mysql -d -p 3016:3016 golang /bin/bash -c "cd /go/src/echo-blog && ./gorun.sh"`)
+    return shipit.remote(`docker run -e VIRTUAL_HOST=api.oct16.cn --name blog_be -v /home/go_files:/go/src -d -p 3016:3016 golang /bin/bash -c "cd /go/src/echo-blog && ./gorun.sh"`)
   })
 }

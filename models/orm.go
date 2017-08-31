@@ -20,7 +20,7 @@ func NewOrm() {
 	var url string
 	url = "localhost:3306"
 	if conf.Env == "production" {
-		url = "mysql:3306"
+		url = "oct16.cn:3307"
 	}
 	o, err := gorm.Open("mysql", "root:123456@tcp("+url+")/blog?charset=utf8mb4&parseTime=true&loc=Local")
 	if err != nil {
