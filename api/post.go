@@ -34,6 +34,9 @@ func GetPostByTitle(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
+	if post.ID == 0 {
+		return c.JSON(http.StatusBadRequest, nil)
+	}
 	return c.JSON(http.StatusOK, post)
 }
 

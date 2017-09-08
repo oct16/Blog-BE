@@ -27,8 +27,10 @@ func GetPosts(page int) interface{} {
 	orm.Order("ID desc").Offset((page - 1) * quantity).Limit(quantity).Find(&post)
 	for _, v := range post {
 		orm.Model(&v).Related(&v.Tags, "Tags").Related(&v.Comments, "Comments")
-		if len(v.Content) > maxLen {
-			v.Content = string(v.Content[:maxLen] + "...")
+		contentRune := []rune(v.Content)
+
+		if len(string(v.Content)) > maxLen {
+			v.Content = string(contentRune[:maxLen]) + "..."
 		}
 		v.Content = string(blackfriday.MarkdownCommon([]byte(v.Content)))
 		result = append(result, v)
@@ -44,7 +46,7 @@ func GetPost(id int) (Post, error) {
 	var post Post
 	ret := orm.First(&post, id).Model(&post).Related(&post.Tags, "Tags").Related(&post.Comments, "Comments")
 	if ret.Error != nil {
-		return post, ret.Error
+		return Post{}, ret.Error
 	}
 	return post, nil
 }
