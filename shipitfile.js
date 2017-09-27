@@ -9,11 +9,10 @@ module.exports = function (shipit) {
       branch: 'master',
       ignores: ['.gitignore', 'shipitfile.js'],
       rsync: ['--del'],
-      keepReleases: 5,
+      keepReleases: 1,
       key: '~/.ssh/id_rsa',
       shallowClone: true,
-      servers: 'root@97.64.19.213'
-    }
+      servers: 'root@97.64.19.213:27471'
   })
 
   shipit.on('published', function () {
@@ -42,6 +41,6 @@ module.exports = function (shipit) {
   })
 
   shipit.blTask('run', function() {
-    return shipit.remote(`docker run -e --name blog_be -v /home/go_files:/go/src -d -p 3016:3016 golang /bin/bash -c "cd /go/src/echo-blog && ./gorun.sh"`)
+    return shipit.remote(`docker run --name blog_be -v /home/go_files:/go/src -d -p 3016:3016 golang /bin/bash -c "cd /go/src/echo-blog && ./gorun.sh"`)
   })
 }
