@@ -13,6 +13,7 @@ module.exports = function (shipit) {
       key: '~/.ssh/id_rsa',
       shallowClone: true,
       servers: 'root@97.64.19.213:27471'
+    }
   })
 
   shipit.on('published', function () {
