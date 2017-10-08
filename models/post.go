@@ -28,8 +28,7 @@ func GetPosts(page int) interface{} {
 	for _, v := range post {
 		orm.Model(&v).Related(&v.Tags, "Tags").Related(&v.Comments, "Comments")
 		contentRune := []rune(v.Content)
-
-		if len(string(v.Content)) > maxLen {
+		if len(contentRune) > maxLen {
 			v.Content = string(contentRune[:maxLen]) + "..."
 		}
 		v.Content = string(blackfriday.MarkdownCommon([]byte(v.Content)))
