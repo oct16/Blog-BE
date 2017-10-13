@@ -34,6 +34,8 @@ func NewRouters(e *echo.Echo) *echo.Echo {
 		a.POST("/post", api.NewPost)
 		a.DELETE("/post/:id", api.DeletePost)
 		a.DELETE("/post/comment/:id", api.DeleteComment)
+
+		a.GET("/qiniu/uptoken", api.GetQiniuAccessToken)
 	}
 
 	all := e.Group("/")
