@@ -20,6 +20,6 @@ func GetQiniuAccessToken(c echo.Context) (err error) {
 	}
 	upToken := putPolicy.UploadToken(mac)
 	m := make(map[string]string)
-	m["token"] = upToken
+	m["uptoken"] = upToken
 	return c.JSON(http.StatusOK, m)
 }
