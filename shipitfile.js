@@ -29,17 +29,17 @@ module.exports = function (shipit) {
     `)
   })
 
-  shipit.blTask('copyDepends', function() {
-    return shipit.remote(`cp -r /home/depends /home/go_files/echo-blog/depends`)
-  })
+  // shipit.blTask('copyDepends', function() {
+  //   return shipit.remote(`cp -r /home/depends /home/go_files/echo-blog/depends`)
+  // })
 
   shipit.blTask('cleanContainer', function() {
     return shipit.remote(`docker stop blog_be || true && docker rm blog_be || true && docker rmi -f blog_be || true`)
   })
 
-  shipit.blTask('buildImage', function() {
-    return shipit.remote(`cd /home/go_files/echo-blog/ && docker build -t blog_be .`)
-  })
+  // shipit.blTask('buildImage', function() {
+  //   return shipit.remote(`cd /home/go_files/echo-blog/ && docker build -t blog_be .`)
+  // })
 
   shipit.blTask('run', function() {
     return shipit.remote(`docker run --name blog_be -v /home/go_files:/go/src -d -p 3016:3016 golang /bin/bash -c "cd /go/src/echo-blog && ./gorun.sh"`)
